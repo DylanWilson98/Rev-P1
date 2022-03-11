@@ -6,17 +6,17 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
-import org.ietf.jgss.GSSManager;
+
 import org.springframework.stereotype.Component;
 
-import javax.persistence.Tuple;
+
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
+
 
 @Component
 public class GameRepo {
@@ -147,12 +147,20 @@ public class GameRepo {
         try {
             Session session = HibernateUtil.getSession();
 
-                //returns games not owned by player of given id
-            Query<Game> q = session.createNativeQuery(
-                    "select g.game_id, title, rating from game_store g " +
-                    "left join" +
-                    " user_collection c on g.game_id = c.game_id" +
-                            " where user_id  is null or user_id !=" + user_id );
+            Query<Game> q = session.createNativeQuery("select * from game_store where game_id in (select game_id from game_store gs " +
+                    "except" +
+                    "(select uc.game_id from user_collection uc where uc.user_id = " + user_id + "))");
+
+                query = q.getResultList();
+
+
+
+                //returns games not owned by player of given id (only games inside colection not game_store fix)!!!!!!!!!!!
+//            Query<Game> q = session.createNativeQuery(
+//                    "select g.game_id, title, rating from game_store g " +
+//                    "inner join" +
+//                    " user_collection c on g.game_id = c.game_id" +
+//                            " where user_id  is null or user_id <>" + user_id );
 
                 query = q.getResultList();
 

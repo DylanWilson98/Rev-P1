@@ -25,8 +25,11 @@ public class HibernateUtil {
             Configuration config = new Configuration();
             Properties props = new Properties();
 
-            FileInputStream propertiesInput = new FileInputStream("C:\\Users\\djmcf\\hibernate.properties");
-            props.load(propertiesInput);
+            ClassLoader loader = Thread.currentThread().getContextClassLoader();
+            props.load(loader.getResourceAsStream("hibernate.properties"));
+
+//            FileInputStream propertiesInput = new FileInputStream("C:\\Users\\djmcf\\hibernate.properties");
+//            props.load(propertiesInput);
 
             config.setProperties(props);
 

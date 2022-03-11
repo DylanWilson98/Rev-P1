@@ -6,17 +6,17 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
-import org.springframework.data.jpa.repository.JpaRepository;
+
 import org.springframework.stereotype.Component;
 
-import javax.jws.soap.SOAPBinding;
+
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.io.IOException;
 import java.util.List;
-import java.util.Queue;
+
 
 
 @Component
@@ -147,6 +147,8 @@ public class UserRepo {
         try {
             Session s = HibernateUtil.getSession();
             Transaction tx = s.beginTransaction();
+
+
             s.delete(user);
 
 //            s.createNativeQuery("declare @max int select @max=ISNULL(max([user_id]-1),0)" +
