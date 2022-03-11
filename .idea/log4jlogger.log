@@ -1,0 +1,4 @@
+2022-03-10 15:08:47 INFO  UserAspect:18 - String org.springframework.boot.autoconfigure.sql.init.SqlInitializationProperties.getUsername()
+2022-03-10 15:08:54 INFO  UserAspect:18 - User com.dylan.controller.UserController.getUser(Integer)
+2022-03-10 15:08:54 INFO  UserAspect:18 - User com.dylan.service.UserService.getUser(Integer)
+2022-03-10 15:08:54 INFO  UserAspect:18 - User com.dylan.repository.UserRepo.getUserById(int)
